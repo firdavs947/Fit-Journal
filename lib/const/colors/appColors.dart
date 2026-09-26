@@ -78,4 +78,5 @@ class Appcolors {
   static Color unSelectedWrapIconColor = Color(0xffAFB0B1);
   static Color unselectedWrapTextColor = Color(0xffE2E2E6);
   static Color scaffoldBodyColor = Color(0xff131315);
+  static Color liquidglassColor = Color(0xff2B2B2E);
 }

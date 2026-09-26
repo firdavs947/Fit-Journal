@@ -1,5 +1,6 @@
 import 'package:fitjournal/const/colors/appColors.dart';
 import 'package:fitjournal/providers/home_provider.dart';
+import 'package:fitjournal/screens/timer_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_glass_easy/liquid_glass_easy.dart';
@@ -30,7 +31,11 @@ class _CustomTrainingState extends State<CustomTraining> {
 
     return GestureDetector(
       onTap: () {
-        context.read<HomeProvider>().toggleSelection(widget.id);
+        // context.read<HomeProvider>().toggleSelection(widget.id);
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) => TimerScreen(title: widget.title, kg:widget.label)),
+        );
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
@@ -75,14 +80,6 @@ class _CustomTrainingState extends State<CustomTraining> {
                     color: isChecked
                         ? Appcolors.selectedWrapIconColor
                         : Colors.white,
-                  ),
-                ),
-                Text(
-                  widget.time,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
                   ),
                 ),
               ],

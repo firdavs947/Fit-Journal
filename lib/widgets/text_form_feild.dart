@@ -1,10 +1,12 @@
 import 'package:fitjournal/const/colors/appColors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextFormFeild extends StatefulWidget {
-  const TextFormFeild({super.key, required this.hintText});
+  const TextFormFeild({super.key, required this.hintText,required this._notecontroller});
   final String hintText;
+  final TextEditingController? _notecontroller;
+  
+
   @override
   State<TextFormFeild> createState() => _TextFormFeildState();
 }
@@ -13,7 +15,12 @@ class _TextFormFeildState extends State<TextFormFeild> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsGeometry.only(left: 15, right: 15, top: 10, bottom: 10),
+      padding: EdgeInsetsGeometry.only(
+        left: 15,
+        right: 15,
+        top: 10,
+        bottom: 10,
+      ),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(color: Appcolors.whiteOpacity65),
@@ -29,8 +36,6 @@ class _TextFormFeildState extends State<TextFormFeild> {
         borderRadius: BorderRadius.circular(20),
         color: Appcolors.containerColor2,
       ),
-      // height:
-      // MediaQuery.sizeOf(context).height * 0.5,
       width: MediaQuery.sizeOf(context).width * 0.9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,11 +53,15 @@ class _TextFormFeildState extends State<TextFormFeild> {
           ),
           SizedBox(height: 5),
           TextFormField(
+            controller: widget._notecontroller,
+            style: TextStyle(color: Colors.white),
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Поле не может быть пустым';
+              }
+              return null;
+            },
             decoration: InputDecoration(
-              // border: OutlineInputBorder(
-              //   borderSide: BorderSide(color: Colors.grey),
-              //   borderRadius: BorderRadius.circular(20),
-              // ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Appcolors.primary),
                 borderRadius: BorderRadius.circular(20),
@@ -63,6 +72,14 @@ class _TextFormFeildState extends State<TextFormFeild> {
               ),
               disabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
